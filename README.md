@@ -1,9 +1,9 @@
 # Solution to MATLAB and Simulink Challenge project <'247'> <'Multi-UAV-Path-Planning-for-Urban-Air-Mobility'>
-This is a template repo for MATLAB and Simulink Challenge Project solutions.
+This is a path planning algorithm for MATLAB and Simulink Challenge Project solutions.
 
 Please add the following items:
 
-[Program link](https://github.com/mathworks/MATLAB-Simulink-Challenge-Project-Hub)
+[Program link](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility)
 
 [Project description link]<Add link to the project description from the list of projects above>
 
