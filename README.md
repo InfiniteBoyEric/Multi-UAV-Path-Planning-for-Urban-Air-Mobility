@@ -4,6 +4,8 @@ This repo involves approach based on bio-inspired algorithms to solve the MATLAB
 
 There is more information in this [program link](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/tree/main).
 
+<font color="lime" size="3">（There are tremendous formulas failed in loading in the `README.md` file, so it is highly recommended to read [`README.pdf`](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/6903ef03caa0ea20b44621e2dde467877e0fb2b2/docs/README.pdf) instead）</font>
+
 ## Introduction
 
 Nowadays the transportation industry has witnessed rising requirement for path planning for Urban Air Mobility (UAM). An efficient path planning system will promisingly make a great contribution to the urban transportation, which it is generally accepted that the algorithm should minimize the sum of time and cost of multiple unmanned aerial vehicles (UAV) and create collision-free trajectories in an efficient way.
@@ -70,8 +72,8 @@ We implement this model by the codes below:
 
 #### Problem Formulation
 
-In an urban environment with buildings, no-fly zones and threat areas, suppose that the starting point of a UAV is $P_s=P_0=[x_0,\, y_0,\, z_0]^T$ with $N$ waypoints $P_i=[x_i,\, y_i,\, z_i]^T (i\in {1,2,\cdots, N})$ and the end point is $P_t=P_{N+1}=[x_{N+1},\, y_{N+1},\, z_{N+1}]^T$. Then we can construct a matrix $P\in \mathbb{R}^{3\times (N+2)}$ as:
-    $$
+In an urban environment with buildings, no-fly zones and threat areas, suppose that the starting point of a UAV is $`P_s=P_0=[x_0, y_0, z_0]^T`$ with $N$ waypoints $`P_i=[x_i, y_i, z_i]^T (i\in {1,2,\cdots, N})`$ and the end point is $`P_t=P_{N+1}=[x_{N+1}, y_{N+1}, z_{N+1}]^T`$. Then we can construct a matrix $`\mathbf{P}\in \mathbb{R}^{3\times (N+2)}`$ as:
+    ```math
     \mathbf{P} =
     \begin{bmatrix}
     P_0 & P_1 & P_2 & \cdots & P_N & P_{N+1}
@@ -81,18 +83,18 @@ In an urban environment with buildings, no-fly zones and threat areas, suppose t
     y_0 & y_1 & y_2 & \cdots & y_N & y_{N+1} \\
     z_0 & z_1 & z_2 & \cdots & z_N & z_{N+1} \\
     \end{bmatrix}
-    $$
-where matrix $P$ records all the coordinates of waypoints and $3\times N$ variables need optimizing (except the starting point and the end point).
+    ```
+where matrix $`\mathbf{P}`$ records all the coordinates of waypoints and $`3\times N`$ variables need optimizing (except the starting point and the end point).
 
-According to the matrix $P$, we are able to get the expression of the path length cost, threat cost, height cost and terrain collision cost of a trajectory, and construct the cost function.
+According to the matrix $`\mathbf{P}`$, we are able to get the expression of the path length cost, threat cost, height cost and terrain collision cost of a trajectory, and construct the cost function.
 
 1. Path Length Cost
-    Path length $L(\mathbf{P})$ is one of the primary factors in the cost function, because of its tight connection with flying time and energy consumption. Since we have already set waypoints, $L(\mathbf{P})$ can be written as
-    $$
+    Path length $`L(\mathbf{P})`$ is one of the primary factors in the cost function, because of its tight connection with flying time and energy consumption. Since we have already set waypoints, $`L(\mathbf{P})`$ can be written as
+    ```math
     L(\mathbf{P}) =
     \sum_{n=0}^{N}\Vert \overrightarrow{P_n P_{n+1}} \Vert_2 =
     \sum_{n=0}^{N}\sqrt{(x_{n+1}-x_n)^2+(y_{n+1}-y_n)^2+(z_{n+1}-z_n)^2}
-    $$
+    ```
 
     ```matlab
     J1 = 0; % Path Length
@@ -103,7 +105,7 @@ According to the matrix $P$, we are able to get the expression of the path lengt
     ```
 
 2. Threat Cost
-    In terms of threat areas, the threat cost $T(\mathbf{P})$ relies on the distance between the UAV and the center of cylinders.
+    In terms of threat areas, the threat cost $`T(\mathbf{P})`$ relies on the distance between the UAV and the center of cylinders.
 
     ```matlab
     J2 = 0; % Threat Cost
