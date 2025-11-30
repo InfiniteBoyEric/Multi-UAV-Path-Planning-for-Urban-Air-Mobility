@@ -282,8 +282,8 @@ Moreover, we have attempted to integrate [MATLAB® App Designer](https://www.mat
 
 ## Model Setup
 
-**Required Environment**: `MATLAB 2023b`
-**Required Toolbox**: None
+**Required Environment**: `MATLAB 2023b`\
+**Required Toolbox**: None\
 **How to run**: Simply run `main.m` and the MATLAB command prompt will output running process and final results, and afterwards there will be two plots created. When it comes to changing the bio-inspired algorithm, it is suggested that you choose an optional algorithm written in `main.m` comments (`main.m` Line 22-24) and modify the string variable `ALGORITHM_OPTION` (`main.m` Line 25), which is also shown in the following figure.
 
 ```matlab
