@@ -194,9 +194,11 @@ We make full use of state-of-the-art bio-inspired algorithms introduced below an
 
 #### [CCO](https://link.springer.com/article/10.1007/s10462-025-11291-x)
 
-The source code can be downloaded at [File Exchange in MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/176828-cuckoo-catfish-optimizer-a-new-meta-heuristic-optimization).
+1. Source Code
 
-1. Core Inspiration and Fundamental Concept
+    The source code can be downloaded at [File Exchange in MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/176828-cuckoo-catfish-optimizer-a-new-meta-heuristic-optimization).
+
+2. Core Inspiration and Fundamental Concept
 
     The **Cuckoo Catfish Optimizer (CCO)** is a novel metaheuristic optimization algorithm inspired by the predatory and parasitic behaviors of the cuckoo catfish (*Synodontis multipunctatus*). It simulates the fish's hunting strategies—including surrounding prey, compressing space, chaotic predation, and brood parasitism—to solve numerical optimization problems efficiently.
 
@@ -206,180 +208,25 @@ The source code can be downloaded at [File Exchange in MATLAB Central](https://w
     - **Transition Phase**: Balances exploration and exploitation for a smooth shift between phases.
     - **Exploitation Phase**: Employs chaotic predation and death/parasitism mechanisms for local refinement.
 
-2. Mathematical Formulation
-    1. Initialization
-
-        ```math
-        x_i^d = \text{rand} \times (Ub^d - Lb^d) + Lb^d, \quad i = 1,\dots,N,\quad d = 1,\dots,D
-        ```
-
-    3. Compressed Space Strategy
-
-         - **Equation (3)**:
-
-         ```math
-         X_i^{new} = X_i + Z_1 \cdot |rd| \cdot \left( \frac{X_{best} + X_{r_1}}{2} - X_{r_2} \right) + \frac{r_3}{2} \cdot (X_{r_3} - X_{r_4})
-         ```
-
-         - **Equation (4)**:
-
-         ```math
-         X_i^{new} = Z_2 \cdot \left( X_{i_1} + |rd| \cdot (X_{i_1} - X_{i_2}) \right) + (1 - Z_2) \cdot X_i
-         ```
-
-         - **Equation (5)**:
-
-         ```math
-         X_i^{new} = X_{r_1} + |rd| \cdot (X_{best} - X_i + X_{r_2} - X_{r_3})
-         ```
-
-         - **Self-preservation**: Triggered when $ t > 0.8N $ or $ \text{rand} > C $, with protection probability:
-
-         ```math
-         p = 0.2 \cdot C + 0.2
-         ```
-         
-    5. Surround Search Strategy
-
-         - **Spiral Search (Eq. 7)**:
-
-         ```math
-         X_i^{new} =
-         \begin{cases}
-         X_e + F \cdot R_1 \cdot \frac{\text{step}}{2} + T^n \cdot s \cdot (1 - R_1) \cdot |\text{step}| + V \cdot \frac{J_i}{It} & \text{if mod}(i, 2) = 0 \\
-         X_e + F \cdot R_1 \cdot \frac{\text{step}}{2} + T^n \cdot c \cdot (1 - R_1) \cdot |\text{step}| + V \cdot \frac{J_i}{It} & \text{otherwise}
-         \end{cases}
-         ```
-
-         - **Spherical Search (Eq. 16)**:
-
-         ```math
-         X_i^{new} =
-         \begin{cases}
-         RotX_r + 2w F \cos(Rt_1) \sin(Rt_2) (RotX_r - X_{new}) & X_q = 1 \\
-         RotX_r + 2w F \sin(Rt_1) \cos(Rt_2) (RotX_r - X_{new}) & X_q = 2 \\
-         RotX_r + 2w F \cos(Rt_2) (RotX_r - X_{new}) & X_q = 3
-         \end{cases}
-         ```
-
-         - Where:
-           - $`T = \left(1 - \sin\left(\frac{\pi}{2} \cdot \frac{It}{MaxIt}\right)\right)^{(It/MaxIt)}`$
-           - $`w = 1 - \frac{e^{It/MaxIt} - 1}{e - 1}`$
-    7. Transition Strategy (Eq. 21)
-
-        ```math
-        X_i^{new} =
-        \begin{cases}
-        \frac{C}{2} \cdot (r_1 X_{best} - r_3 X_i) + T^2 \cdot \text{lev}(D) \cdot |\text{Step}_2| & \text{if mod}(i, 2) = 0 \\
-        \frac{X_{best} + X_i}{2} + De \cdot \left( 2 R_1 \cdot \text{Step}_2 - \frac{R_3}{2} \cdot (De \cdot R_3 - 1) \right) & \text{otherwise}
-        \end{cases}
-        ```
-         - **Lévy Flight**:
-            ```math
-            \text{lev} = 0.05 \cdot \frac{u}{|v|^{1/\beta}}, \quad \beta = 1.5
-            ```
-
-    9. Chaotic Predation (Eq. 23)
-
-        ```math
-        X_i^{new} =
-        \begin{cases}
-        X_{best} + F \cdot S \cdot (X_{best} - X_i) & \text{if } J_i > J_{in} \\
-        X_{best} (1 + T^5 \cdot Cy \cdot E) + F \cdot S \cdot (X_{best} - X_i) & \text{else if } J_i > J_{in} \cdot Lx \\
-        X_{best} (1 + T^5 \cdot Gs) + F \cdot S \cdot (X_{best} - X_i) & \text{otherwise}
-        \end{cases}
-        ```
-
-         where $`Lx = |rd| \cdot r_1`$, $`Cy = \frac{1}{\pi (1 + C^2)}`$ and $`Gs \sim \mathcal{N}(0, C^2)`$.
-    10. Death and Parasitism
-         - **Egg distribution (Eq. 29)**:
-
-           ```math
-            X_i^{new} = r_1 \cdot (Up_c - Low_c) + Low_c
-            ```
-           
-         - **Rebirth (Eq. 30)**:
-
-            ```math
-            X_i^{new} = r_1 \cdot (Ub - Lb) + Lb
-            ```
-            
-         - **Switch (Eq. 31)**: Uses (29) if $ \text{rand} > C $, else (30).
-
-    11. Position Update (Eq. 32)
-
-        ```math
-        X_i =
-        \begin{cases}
-        X_i^{new} & \text{if } F_i^{new} < F_i \\
-        X_i & \text{else}
-        \end{cases}
-        ```
-
 #### [GGO](https://www.sciencedirect.com/science/article/pii/S0957417423026490)
 
-The source code is now accessible at [File Exchange in MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/163321-greylag-goose-optimization-ggo-algorithm).
+1. Source Code
+    The source code is now accessible at [File Exchange in MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/163321-greylag-goose-optimization-ggo-algorithm).
 
-1. Core Inspiration and Fundamental Concept
+2. Core Inspiration and Fundamental Concept
 
     GGO is a novel **nature-inspired metaheuristic algorithm** based on the social and dynamic behaviors of greylag geese, particularly their **V-shaped flight formation** during migration. It belongs to the **swarm-based optimization** family and is designed to efficiently balance **exploration** and **exploitation**.
     - Geese fly in a **V-formation** to reduce air resistance, allowing the flock to fly **~70% farther** collectively.
     - The algorithm mimics **group dynamics**: explorers search for new areas, while exploiters refine existing solutions.
     - **Dynamic group adjustment**: If the best solution stagnates for 3 iterations, the algorithm increases explorers to avoid local optima.
 
-2. Mathematical Formulation
-    1. Population Initialization
-        The population $`X_i`$ (where $`i = 1, 2, \ldots, n`$) is initialized randomly.
-
-    2. Exploration Phase
-         - **Moving toward the best solution**:
-           ```math
-           \mathbf{X}(t+1) = \mathbf{X}^*(t) - \mathbf{A} \cdot |\mathbf{C} \cdot \mathbf{X}^*(t) - \mathbf{X}(t)|
-           ```
-           where $`\mathbf{A} = 2\mathbf{a} \cdot r_1 - \mathbf{a}`$, $`\mathbf{C} = 2 \cdot r_2`$, and $`\mathbf{a}`$ decreases from 2 to 0.
-
-         - **Random exploration** (when $`|\mathbf{A}| \geq 1`$):
-           ```math
-           \mathbf{X}(t+1) = w_1 \cdot \mathbf{X}_{paddle1} + \mathbf{z} \cdot w_2 \cdot (\mathbf{X}_{paddle2} - \mathbf{X}_{paddle3}) + (1 - \mathbf{z}) \cdot w_3 \cdot (\mathbf{X} - \mathbf{X}_{paddle1})
-           ```
-           where $`\mathbf{z} = 1 - \left( \frac{t}{t_{max}} \right)^2`$.
-
-         - **Alternate update** (when $`r_3 \geq 0.5`$):
-           ```math
-           \mathbf{X}(t+1) = w_4 \cdot [\mathbf{X}^*(t) - \mathbf{X}(t)] \cdot e^{b l} \cdot \cos(2\pi l) + [2w_1 (r_4 + r_5)] \cdot \mathbf{X}^*(t)
-           ```
-
-    3. Exploitation Phase
-         - **Moving toward sentries**:
-           ```math
-           \mathbf{X}_1 = \mathbf{X}_{Sentry1} - \mathbf{A}_1 \cdot |\mathbf{C}_1 \cdot \mathbf{X}_{Sentry1} - \mathbf{X}|
-           ```
-           (Similarly for $`\mathbf{X}_2`$, $`\mathbf{X}_3`$)
-           ```math
-           \mathbf{X}(t+1) = \frac{\mathbf{X}_1 + \mathbf{X}_2 + \mathbf{X}_3}{3}
-           ```
-
-         - **Searching near the best solution**:
-           ```math
-           \mathbf{X}(t+1) = \mathbf{X}(t) + \mathbf{D} \cdot (1 + \mathbf{z}) \cdot w \cdot (\mathbf{X} - \mathbf{X}_{Flock1})
-           ```
-
-    4. Binary GGO for Feature Selection
-      - Continuous values are binarized using a **sigmoid function**:
-        ```math
-        \chi^{t+1}_d =
-        \begin{cases}
-        1 & \text{if } \text{Sigmoid}(m) \geq 0.5 \\
-        0 & \text{otherwise}
-        \end{cases}
-        ```
-        where $`\text{Sigmoid}(m) = \frac{1}{1 + e^{-10(m - 0.5)}}`$.
-
 #### [THRO](https://link.springer.com/article/10.1007/s10462-025-11269-9)
 
-The source code is publicly available at [GitHub](https://github.com/zwg770123/THRO) and [File Exchange in MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/181341-tianji-s-horse-racing-optimization-thro).
+1. Source Code
 
-1. Core Inspiration and Fundamental Concept
+    The source code is publicly available at [GitHub](https://github.com/zwg770123/THRO) and [File Exchange in MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/181341-tianji-s-horse-racing-optimization-thro).
+
+2. Core Inspiration and Fundamental Concept
 
     **Tianji's Horse Racing Optimization (THRO)** is a novel metaheuristic algorithm inspired by the ancient Chinese historical story of "Tianji's Horse Racing." The core strategic principle from the story is: **leveraging one's strengths to counteract an opponent's weaknesses through intelligent matching strategies.**
 
@@ -388,97 +235,6 @@ The source code is publicly available at [GitHub](https://github.com/zwg770123/T
     - Maintaining two competing populations: Tianji's horses ($`X_T`$) and King's horses ($`X_K`$)
     - Each horse represents a candidate solution, with "speed" determined by fitness function values (lower fitness = faster horse in minimization problems)
     - Implementing five dynamic competition scenarios to guide search direction
-
-2. Mathematical Formulation
-    1. Population Representation
-
-        **Tianji's Horses**:
-        ```math
-        X_T = \begin{bmatrix}
-        x_{T1} \\
-        \vdots \\
-        x_{T_i} \\
-        \vdots \\
-        x_{T_n}
-        \end{bmatrix} = \begin{bmatrix}
-        x^1_{T1} & x^j_{T1} & x^d_{T1} \\
-        \vdots & \vdots & \vdots \\
-        x^1_{T_i} & x^j_{T_i} & x^d_{T_i} \\
-        \vdots & \vdots & \vdots \\
-        x^1_{T_n} & x^j_{T_n} & x^d_{T_n}
-        \end{bmatrix}
-        ```
-
-        **King's Horses**:
-        ```math
-        X_K = \begin{bmatrix}
-        x_{K1} \\
-        \vdots \\
-        x_{K_i} \\
-        \vdots \\
-        x_{K_n}
-        \end{bmatrix} = \begin{bmatrix}
-        x^1_{K1} & x^j_{K1} & x^d_{K1} \\
-        \vdots & \vdots & \vdots \\
-        x^1_{K_i} & x^j_{K_i} & x^d_{K_i} \\
-        \vdots & \vdots & \vdots \\
-        x^1_{K_n} & x^j_{K_n} & x^d_{K_n}
-        \end{bmatrix}
-        ```
-    2. Core Competition Strategies
-        - Scenario 1: Tianji's Slowest Horse Faster Than King's Slowest Horse
-            **Tianji's Slowest Horse Update**:
-            ```math
-            \begin{cases}
-            x_{Ts}(t+1) = (p \times x_{Ts}(t) + (1 - p) \times x_{Tf}(t) + R \times (x_{Tf}(t) - x_{Ts}(t)) + p \times (\bar{x}_{Tf}(t) - \bar{x}_{K}(t))) \times \alpha + \beta \\
-            Tsi = Tsi - 1
-            \end{cases}
-            ```
-
-            **King's Slowest Horse Update**:
-            ```math
-            \begin{cases}
-            v_{Ksi}(t+1) = (p \times x_{Ksi}(t) + (1-p) \times x_{Tsi}(t) + R \times (x_{Tsi}(t) - x_{Ksi}(t) + p \times (\bar{x}_{Tf}(t) - \bar{x}_{K}(t)))) \times \alpha + \beta \\
-            Ksi = Ksi - 1
-            \end{cases}
-            ```
-        - Scenario 2: Tianji's Slowest Horse Slower Than King's Slowest Horse
-            **Tianji's Slowest Horse Update**:
-            ```math
-            \begin{cases}
-            x_{Ts}(t+1) = (p \times x_{Ts}(t) + (1 - p) \times x_{Tr1}(t) + R \times (x_{Tr1}(t) - x_{Ts}(t) + p \times (\bar{x}_{T}(t) - \bar{x}_{K}(t)))) \times \alpha + \beta \\
-            Tsi = Tsi - 1
-            \end{cases}
-            ```
-
-            **King's Fastest Horse Update**:
-            ```math
-            \begin{cases}
-            x_{Kf}(t+1) = (p \times x_{Kf}(t) + (1 - p) \times x_{Kf}(t) + R \times (x_{Kf}(t) - x_{Kf}(t) + p \times (\bar{x}_{T}(t) - \bar{x}_{K}(t)))) \times \alpha + \beta \\
-            Kfi = Kfi + 1
-            \end{cases}
-            ```
-        - Scenarios 3-5: Other Relative Speed Conditions
-            Each scenario implements different matching strategies and update equations to ensure effective balance between exploration and exploitation under various conditions.
-
-    3. Training Strategy
-        **Tianji's Horses Training**:
-        ```math
-        v_{Ti}^j(t + 1) =
-        \begin{cases}
-        x_{Ti}^j(t) + L_T \times (x_{Tr4}^j - x_{Tr5}^j) & \text{if } rand < 0.5 \\
-        x_{Tf}^j(t) + M_T \times (x_{Tf}^j(t) - x_{Ti}^j(t)) & \text{else}
-        \end{cases}
-        ```
-
-        **King's Horses Training**:
-        ```math
-        v_{Ki}^j(t+1) =
-        \begin{cases}
-        x_{Ki}^j(t) + L_K \times (x_{Kr1}^j - x_{Kr2}^j) & \text{if } rand < 0.5 \\
-        x_{Kf}^j(t) + M_K \times (x_{Kf}^j(t) - x_{Ki}^j(t)) & \text{else}
-        \end{cases}
-        ```
 
 ### Results
 
@@ -535,21 +291,24 @@ ALGORITHM_OPTION = 'GGO';  % <- Modify this variable to change the algorithm
 
 Running `main.m` in the way mentioned above will create two plots, one of which is the 3D-view trajectories in the urban environment and the other is the top view of the former figure. Here we choose three bio-inspired algorithm (CCO, GGO, THRO) as examples and the executing results are demonstrated below.
 
-**CCO**:
+**CCO**:\
 3D-view:
 ![CCO_Multi-UAV Path Planning in Urban Environment](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/main/figs/CCO_Multi-UAV%20Path%20Planning%20in%20Urban%20Environment.png)
+
 Top view:
 ![CCO_Top-View Trajectories](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/main/figs/CCO_Top-View%20Trajectories.png)
 
-**GGO**:
+**GGO**:\
 3D-view:
 ![GGO_Multi-UAV Path Planning in Urban Environment](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/main/figs/GGO_Multi-UAV%20Path%20Planning%20in%20Urban%20Environment.png)
+
 Top view:
 ![GGO_Top-View Trajectories](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/main/figs/GGO_Top-View%20Trajectories.png)
 
-**THRO**:
+**THRO**:\
 3D-view:
 ![THRO_Multi-UAV Path Planning in Urban Environment](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/main/figs/THRO_Multi-UAV%20Path%20Planning%20in%20Urban%20Environment.png)
+
 Top view:
 ![THRO_Top-View Trajectories](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/main/figs/THRO_Top-View%20Trajectories.png)
 
