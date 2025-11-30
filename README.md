@@ -208,33 +208,41 @@ The source code can be downloaded at [File Exchange in MATLAB Central](https://w
 
 2. Mathematical Formulation
     1. Initialization
+
         ```math
         x_i^d = \text{rand} \times (Ub^d - Lb^d) + Lb^d, \quad i = 1,\dots,N,\quad d = 1,\dots,D
         ```
-    2. Compressed Space Strategy
+
+    3. Compressed Space Strategy
 
          - **Equation (3)**:
+
          ```math
          X_i^{new} = X_i + Z_1 \cdot |rd| \cdot \left( \frac{X_{best} + X_{r_1}}{2} - X_{r_2} \right) + \frac{r_3}{2} \cdot (X_{r_3} - X_{r_4})
          ```
 
          - **Equation (4)**:
+
          ```math
          X_i^{new} = Z_2 \cdot \left( X_{i_1} + |rd| \cdot (X_{i_1} - X_{i_2}) \right) + (1 - Z_2) \cdot X_i
          ```
 
          - **Equation (5)**:
+
          ```math
          X_i^{new} = X_{r_1} + |rd| \cdot (X_{best} - X_i + X_{r_2} - X_{r_3})
          ```
 
          - **Self-preservation**: Triggered when $ t > 0.8N $ or $ \text{rand} > C $, with protection probability:
+
          ```math
          p = 0.2 \cdot C + 0.2
          ```
-    3. Surround Search Strategy
+         
+    5. Surround Search Strategy
 
          - **Spiral Search (Eq. 7)**:
+
          ```math
          X_i^{new} =
          \begin{cases}
@@ -244,6 +252,7 @@ The source code can be downloaded at [File Exchange in MATLAB Central](https://w
          ```
 
          - **Spherical Search (Eq. 16)**:
+
          ```math
          X_i^{new} =
          \begin{cases}
@@ -256,48 +265,56 @@ The source code can be downloaded at [File Exchange in MATLAB Central](https://w
          - Where:
            - $`T = \left(1 - \sin\left(\frac{\pi}{2} \cdot \frac{It}{MaxIt}\right)\right)^{(It/MaxIt)}`$
            - $`w = 1 - \frac{e^{It/MaxIt} - 1}{e - 1}`$
-    4. Transition Strategy (Eq. 21)
-            ```math
-            X_i^{new} =
-            \begin{cases}
-            \frac{C}{2} \cdot (r_1 X_{best} - r_3 X_i) + T^2 \cdot \text{lev}(D) \cdot |\text{Step}_2| & \text{if mod}(i, 2) = 0 \\
-            \frac{X_{best} + X_i}{2} + De \cdot \left( 2 R_1 \cdot \text{Step}_2 - \frac{R_3}{2} \cdot (De \cdot R_3 - 1) \right) & \text{otherwise}
-            \end{cases}
-            ```
+    7. Transition Strategy (Eq. 21)
+
+        ```math
+        X_i^{new} =
+        \begin{cases}
+        \frac{C}{2} \cdot (r_1 X_{best} - r_3 X_i) + T^2 \cdot \text{lev}(D) \cdot |\text{Step}_2| & \text{if mod}(i, 2) = 0 \\
+        \frac{X_{best} + X_i}{2} + De \cdot \left( 2 R_1 \cdot \text{Step}_2 - \frac{R_3}{2} \cdot (De \cdot R_3 - 1) \right) & \text{otherwise}
+        \end{cases}
+        ```
          - **Lévy Flight**:
             ```math
             \text{lev} = 0.05 \cdot \frac{u}{|v|^{1/\beta}}, \quad \beta = 1.5
             ```
 
-    5. Chaotic Predation (Eq. 23)
-            ```math
-            X_i^{new} =
-            \begin{cases}
-            X_{best} + F \cdot S \cdot (X_{best} - X_i) & \text{if } J_i > J_{in} \\
-            X_{best} (1 + T^5 \cdot Cy \cdot E) + F \cdot S \cdot (X_{best} - X_i) & \text{else if } J_i > J_{in} \cdot Lx \\
-            X_{best} (1 + T^5 \cdot Gs) + F \cdot S \cdot (X_{best} - X_i) & \text{otherwise}
-            \end{cases}
-            ```
+    9. Chaotic Predation (Eq. 23)
+
+        ```math
+        X_i^{new} =
+        \begin{cases}
+        X_{best} + F \cdot S \cdot (X_{best} - X_i) & \text{if } J_i > J_{in} \\
+        X_{best} (1 + T^5 \cdot Cy \cdot E) + F \cdot S \cdot (X_{best} - X_i) & \text{else if } J_i > J_{in} \cdot Lx \\
+        X_{best} (1 + T^5 \cdot Gs) + F \cdot S \cdot (X_{best} - X_i) & \text{otherwise}
+        \end{cases}
+        ```
+
          where $`Lx = |rd| \cdot r_1`$, $`Cy = \frac{1}{\pi (1 + C^2)}`$ and $`Gs \sim \mathcal{N}(0, C^2)`$.
-    6. Death and Parasitism
+    10. Death and Parasitism
          - **Egg distribution (Eq. 29)**:
-            ```math
+
+           ```math
             X_i^{new} = r_1 \cdot (Up_c - Low_c) + Low_c
             ```
+           
          - **Rebirth (Eq. 30)**:
+
             ```math
             X_i^{new} = r_1 \cdot (Ub - Lb) + Lb
             ```
+            
          - **Switch (Eq. 31)**: Uses (29) if $ \text{rand} > C $, else (30).
 
-    7. Position Update (Eq. 32)
-            ```math
-            X_i =
-            \begin{cases}
-            X_i^{new} & \text{if } F_i^{new} < F_i \\
-            X_i & \text{else}
-            \end{cases}
-            ```
+    11. Position Update (Eq. 32)
+
+        ```math
+        X_i =
+        \begin{cases}
+        X_i^{new} & \text{if } F_i^{new} < F_i \\
+        X_i & \text{else}
+        \end{cases}
+        ```
 
 #### [GGO](https://www.sciencedirect.com/science/article/pii/S0957417423026490)
 
