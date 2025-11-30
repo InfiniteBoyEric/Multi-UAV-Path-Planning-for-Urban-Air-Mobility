@@ -86,8 +86,9 @@ where matrix $`\mathbf{P}`$ records all the coordinates of waypoints and $`3\tim
 
 According to the matrix $`\mathbf{P}`$, we are able to get the expression of the path length cost, threat cost, height cost and terrain collision cost of a trajectory, and construct the cost function.
 
-1. Path Length Cost\
-    Path length $`L(\mathbf{P})`$ is one of the primary factors in the cost function, because of its tight connection with flying time and energy consumption. Since we have already set waypoints, $`L(\mathbf{P})`$ can be written as
+1. Path Length Cost
+
+   Path length $`L(\mathbf{P})`$ is one of the primary factors in the cost function, because of its tight connection with flying time and energy consumption. Since we have already set waypoints, $`L(\mathbf{P})`$ can be written as
     ```math
     L(\mathbf{P}) =
     \sum_{n=0}^{N}\Vert \overrightarrow{P_n P_{n+1}} \Vert_2 =
@@ -102,7 +103,8 @@ According to the matrix $`\mathbf{P}`$, we are able to get the expression of the
     end
     ```
 
-2. Threat Cost\
+2. Threat Cost
+
     In terms of threat areas, the threat cost $`T(\mathbf{P})`$ relies on the distance between the UAV and the center of cylinders.
 
     ```matlab
@@ -119,7 +121,8 @@ According to the matrix $`\mathbf{P}`$, we are able to get the expression of the
     end
     ```
 
-3. Height Cost\
+3. Height Cost
+
     Contemporary laws usually demand that a UAV should not rise over its limited height, and UAVs are always under-performing as a consequence of heavy wind in high altitudes. Therefore, height cost $`H(\mathbf{P})`$ is worth considering.
 
     ```matlab
@@ -131,7 +134,8 @@ According to the matrix $`\mathbf{P}`$, we are able to get the expression of the
     end
     ```
 
-4. Terrain Collision Cost\
+4. Terrain Collision Cost
+
     So as to avoid collision against the ground, the cost function should also contains terrain collision cost $`C(\mathbf{P})`$.
 
     ```matlab
@@ -194,11 +198,11 @@ We make full use of state-of-the-art bio-inspired algorithms introduced below an
 
 #### [CCO](https://link.springer.com/article/10.1007/s10462-025-11291-x)
 
-1. Source Code\
+1. Source Code
 
     The source code can be downloaded at [File Exchange in MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/176828-cuckoo-catfish-optimizer-a-new-meta-heuristic-optimization).
 
-2. Core Inspiration and Fundamental Concept\
+2. Core Inspiration and Fundamental Concept
 
     The **Cuckoo Catfish Optimizer (CCO)** is a novel metaheuristic optimization algorithm inspired by the predatory and parasitic behaviors of the cuckoo catfish (*Synodontis multipunctatus*). It simulates the fish's hunting strategies—including surrounding prey, compressing space, chaotic predation, and brood parasitism—to solve numerical optimization problems efficiently.
 
@@ -210,11 +214,11 @@ We make full use of state-of-the-art bio-inspired algorithms introduced below an
 
 #### [GGO](https://www.sciencedirect.com/science/article/pii/S0957417423026490)
 
-1. Source Code\
+1. Source Code
 
     The source code is now accessible at [File Exchange in MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/163321-greylag-goose-optimization-ggo-algorithm).
 
-2. Core Inspiration and Fundamental Concept\
+2. Core Inspiration and Fundamental Concept
 
     GGO is a novel **nature-inspired metaheuristic algorithm** based on the social and dynamic behaviors of greylag geese, particularly their **V-shaped flight formation** during migration. It belongs to the **swarm-based optimization** family and is designed to efficiently balance **exploration** and **exploitation**.
     - Geese fly in a **V-formation** to reduce air resistance, allowing the flock to fly **~70% farther** collectively.
@@ -223,11 +227,11 @@ We make full use of state-of-the-art bio-inspired algorithms introduced below an
 
 #### [THRO](https://link.springer.com/article/10.1007/s10462-025-11269-9)
 
-1. Source Code\
+1. Source Code
 
     The source code is publicly available at [GitHub](https://github.com/zwg770123/THRO) and [File Exchange in MATLAB Central](https://www.mathworks.com/matlabcentral/fileexchange/181341-tianji-s-horse-racing-optimization-thro).
 
-2. Core Inspiration and Fundamental Concept\
+2. Core Inspiration and Fundamental Concept
 
     **Tianji's Horse Racing Optimization (THRO)** is a novel metaheuristic algorithm inspired by the ancient Chinese historical story of "Tianji's Horse Racing." The core strategic principle from the story is: **leveraging one's strengths to counteract an opponent's weaknesses through intelligent matching strategies.**
 
@@ -241,15 +245,18 @@ We make full use of state-of-the-art bio-inspired algorithms introduced below an
 
 The results after selecting the algorithm and executing the program are depicted below. There is more information in Section [Demo](#demo).
 
-1. CCO\
+1. CCO
+
     The figure demonstrates that the average consumed time for each UAV is $(3.89+3.25+3.76)/3 = 3.63$s.
     ![CCO_SolvingTime](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/1279b36e91f9cbe530bd27e43c3795b87178174f/figs/CCO_SolvingTime.png)
 
-2. GGO\
+2. GGO
+
     The figure demonstrates that the average consumed time for each UAV is $(3.06+3.03+3.09)/3 = 3.06$s.
     ![GGO_SolvingTime](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/1279b36e91f9cbe530bd27e43c3795b87178174f/figs/GGO_SolvingTime.png)
 
-3. THRO\
+3. THRO
+
     The figure demonstrates that the average consumed time for each UAV is $(8.32+8.25+8.69)/3 = 8.42$s.
     ![THRO_SolvingTime](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/1279b36e91f9cbe530bd27e43c3795b87178174f/figs/THRO_SolvingTime.png)
 
