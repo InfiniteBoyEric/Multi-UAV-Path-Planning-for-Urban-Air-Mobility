@@ -97,7 +97,11 @@ function cost = MyCost(Xbest, Chos)
     end
     
     J3 = 0; % Height Cost
-    for i = 1:n, if z(i) < 0, J3 = J3 + J_inf; end; end
+    for i = 1:n
+        if z(i) < 0
+        J3 = J3 + J_inf;
+        end
+    end
     
     J4 = 0; % Terrain Collision
     for i = 1:N
@@ -131,3 +135,4 @@ function dist = DistP2S(x, a, b)
     end
 
 end
+
