@@ -4,7 +4,7 @@ This repo involves approach based on bio-inspired algorithms to solve the MATLAB
 
 There is more information in this [program link](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/tree/main).
 
-There are tremendous formulas failed in loading in the `README.md` file, so it is highly recommended to read [`README.pdf`](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/6903ef03caa0ea20b44621e2dde467877e0fb2b2/docs/README.pdf) instead.
+**There are tremendous formulas failed in loading in the `README.md` file, so it is highly recommended to read [`README.pdf`](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/6903ef03caa0ea20b44621e2dde467877e0fb2b2/docs/README.pdf) instead.**
 
 ## Introduction
 
