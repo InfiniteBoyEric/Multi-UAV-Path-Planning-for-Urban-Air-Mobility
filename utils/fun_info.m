@@ -90,7 +90,7 @@ function cost = MyCost(Xbest, Chos)
         t = threats(i, :);
         for j = 1:N-1
             dist = DistP2S([t(1), t(2)], [x_all(j), y_all(j)], [x_all(j+1), y_all(j+1)]);
-            if dist < t(4) + 10 % 安全距离
+            if dist < t(4) + 10  % Safe Distance
                 J2 = J2 + J_inf;
             end
         end
@@ -103,7 +103,7 @@ function cost = MyCost(Xbest, Chos)
     for i = 1:N
         yid = max(1, min(round(y_all(i)), Hrmax));
         xid = max(1, min(round(x_all(i)), Hcmax));
-        if z_abs(i) < H(yid, xid) + 5 % Min Height
+        if z_abs(i) < H(yid, xid) + 5  % Min Height
              J4 = J4 + J_inf;
         end
     end
@@ -129,4 +129,5 @@ function dist = DistP2S(x, a, b)
     else
         dist = d_ax; 
     end
+
 end
