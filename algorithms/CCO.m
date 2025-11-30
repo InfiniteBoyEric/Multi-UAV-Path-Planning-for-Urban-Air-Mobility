@@ -180,7 +180,6 @@ end
 [FW_CCO,index_w] =max(PopFit);
 FA_CCO           =mean(PopFit);
 SE_CCO           =std(PopFit);
-toc;
 end
 
 function  X=SpaceBound(X,Up,Low)
