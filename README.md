@@ -333,4 +333,4 @@ Top view:
 [7] Wang T L, Gu S W, Liu R J, et al. Cuckoo catfish optimizer: a new meta-heuristic optimization algorithm[J]. Artificial Intelligence Review, 2025, 58(10).\
 [8] Gámez M G M, Vázquez H P. A Novel Swarm Optimization Algorithm Based on Hive Construction by *Tetragonula carbonaria* Builder Bees[J]. Mathematics 2025, 13, 2721.\
 [9] Ekechi C C, Elfouly T, Alouani A, et al. A Survey on UAV Control with Multi-Agent Reinforcement Learning[J]. DRONES, 2025, 9(7):484.\
-[10] Christianos F, Schfer L, Albrecht S V. Shared Experience Actor-Critic for Multi-Agent Reinforcement Learning[J]. 2020.\
+[10] Christianos F, Schfer L, Albrecht S V. Shared Experience Actor-Critic for Multi-Agent Reinforcement Learning[J]. 2020.
