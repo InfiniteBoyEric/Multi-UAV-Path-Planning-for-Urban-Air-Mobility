@@ -324,13 +324,13 @@ Top view:
 
 ## Reference
 
-[1] Meng W, Zhang X, Zhou L,et al. Advances in UAV Path Planning: A Comprehensive Review of Methods, Challenges, and Future Directions[J]. DRONES, 2025, 9(5):376.
-[2] Wang L, Du H, Zhang Z, et al. Tianji's horse racing optimization (THRO): a new metaheuristic inspired by ancient wisdom and its engineering optimization applications[J]. Artificial Intelligence Review, 2025, 58(9).
-[3] El-Kenawy E S M, Khodadadi N, Mirjalili S, et al. Greylag Goose Optimization: Nature-inspired optimization algorithm[J]. Expert Systems with Applications, 238.
-[4] Braik M, Al-Hiary H, Alzoubi H, et al. Tornado optimizer with Coriolis force: a novel bio-inspired meta-heuristic algorithm for solving engineering problems[J]. Artificial Intelligence Review, 2025, 58(4).
-[5] Bohat V K, Hashim F A, Batra H, et al. Phototropic growth algorithm: A novel metaheuristic inspired from phototropic growth of plants[J]. Knowledge-Based Systems, 2025, 322.
-[6] Ghasemi M, Zare M, Trojovsk P, et al. Optimization based on the smart behavior of plants with its engineering applications: Ivy algorithm[J]. Knowledge-Based Systems, 2024, 295(000):36.
-[7] Wang T L, Gu S W, Liu R J, et al. Cuckoo catfish optimizer: a new meta-heuristic optimization algorithm[J]. Artificial Intelligence Review, 2025, 58(10).
-[8] Gámez M G M, Vázquez H P. A Novel Swarm Optimization Algorithm Based on Hive Construction by *Tetragonula carbonaria* Builder Bees[J]. Mathematics 2025, 13, 2721.
-[9] Ekechi C C, Elfouly T, Alouani A, et al. A Survey on UAV Control with Multi-Agent Reinforcement Learning[J]. DRONES, 2025, 9(7):484.
-[10] Christianos F, Schfer L, Albrecht S V. Shared Experience Actor-Critic for Multi-Agent Reinforcement Learning[J]. 2020.
+[1] Meng W, Zhang X, Zhou L,et al. Advances in UAV Path Planning: A Comprehensive Review of Methods, Challenges, and Future Directions[J]. DRONES, 2025, 9(5):376.\
+[2] Wang L, Du H, Zhang Z, et al. Tianji's horse racing optimization (THRO): a new metaheuristic inspired by ancient wisdom and its engineering optimization applications[J]. Artificial Intelligence Review, 2025, 58(9).\
+[3] El-Kenawy E S M, Khodadadi N, Mirjalili S, et al. Greylag Goose Optimization: Nature-inspired optimization algorithm[J]. Expert Systems with Applications, 238.\
+[4] Braik M, Al-Hiary H, Alzoubi H, et al. Tornado optimizer with Coriolis force: a novel bio-inspired meta-heuristic algorithm for solving engineering problems[J]. Artificial Intelligence Review, 2025, 58(4).\
+[5] Bohat V K, Hashim F A, Batra H, et al. Phototropic growth algorithm: A novel metaheuristic inspired from phototropic growth of plants[J]. Knowledge-Based Systems, 2025, 322.\
+[6] Ghasemi M, Zare M, Trojovsk P, et al. Optimization based on the smart behavior of plants with its engineering applications: Ivy algorithm[J]. Knowledge-Based Systems, 2024, 295(000):36.\
+[7] Wang T L, Gu S W, Liu R J, et al. Cuckoo catfish optimizer: a new meta-heuristic optimization algorithm[J]. Artificial Intelligence Review, 2025, 58(10).\
+[8] Gámez M G M, Vázquez H P. A Novel Swarm Optimization Algorithm Based on Hive Construction by *Tetragonula carbonaria* Builder Bees[J]. Mathematics 2025, 13, 2721.\
+[9] Ekechi C C, Elfouly T, Alouani A, et al. A Survey on UAV Control with Multi-Agent Reinforcement Learning[J]. DRONES, 2025, 9(7):484.\
+[10] Christianos F, Schfer L, Albrecht S V. Shared Experience Actor-Critic for Multi-Agent Reinforcement Learning[J]. 2020.\
