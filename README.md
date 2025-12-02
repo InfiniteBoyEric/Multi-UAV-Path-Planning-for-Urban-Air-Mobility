@@ -195,7 +195,7 @@ switch ALGORITHM_OPTION
 end
 ```
 
-### Utilized Algorithms
+### Utilized Algorithms (More Information in [`README.pdf`](https://github.com/InfiniteBoyEric/Multi-UAV-Path-Planning-for-Urban-Air-Mobility/blob/6903ef03caa0ea20b44621e2dde467877e0fb2b2/docs/README.pdf))
 
 We make full use of state-of-the-art bio-inspired algorithms introduced below and modify them in order that they can be applied to solve trajectories for UAVs. Actually there are more options in the `.\algorithms` directory, and all of them are executable and worth trying, including [Ivy algorithm (IVY)](https://www.sciencedirect.com/science/article/pii/S0950705124004842), [*Tetragonula carbonaria* Optimization Algorithm (TGCOA)](https://www.mdpi.com/2227-7390/13/17/2721), [Tornado optimizer with Coriolis force (TOC)](https://link.springer.com/article/10.1007/s10462-025-11118-9), etc. Principles of CCO, GGO, and THRO are briefly listed as follows, and the executing results can be seen in Section [Results](#results).
 
