@@ -72,28 +72,29 @@ We implement this model by the codes below:
 
 #### Problem Formulation
 
-In an urban environment with buildings, no-fly zones and threat areas, suppose that the starting point of a UAV is $`P_s=P_0=[x_0, y_0, z_0]^T`$ with $N$ waypoints $`P_i=[x_i, y_i, z_i]^T (i\in {1,2,\cdots, N})`$ and the end point is $`P_t=P_{N+1}=[x_{N+1}, y_{N+1}, z_{N+1}]^T`$. Then we can construct a matrix $`\mathbf{P}\in \mathbb{R}^{3\times (N+2)}`$ as:
-    ```math
-    \mathbf{P} = \begin{bmatrix}
-    P_0 & P_1 & P_2 & \cdots & P_N & P_{N+1}
-    \end{bmatrix} = \begin{bmatrix}
-    x_0 & x_1 & x_2 & \cdots & x_N & x_{N+1} \\
-    y_0 & y_1 & y_2 & \cdots & y_N & y_{N+1} \\
-    z_0 & z_1 & z_2 & \cdots & z_N & z_{N+1} \\
-    \end{bmatrix}
-    ```
-where matrix $`\mathbf{P}`$ records all the coordinates of waypoints and $`3\times N`$ variables need optimizing (except the starting point and the end point).
+In an urban environment with buildings, no-fly zones and threat areas, suppose that the starting point of a UAV is $P_s=P_0=[x_0, y_0, z_0]^T$ with $N$ waypoints $P_i=[x_i, y_i, z_i]^T (i\in \{1,2,\cdots, N\})$ and the end point is $P_t=P_{N+1}=[x_{N+1}, y_{N+1}, z_{N+1}]^T$. Then we can construct a matrix $\mathbf{P}\in \mathbb{R}^{3\times (N+2)}$ as:
 
-According to the matrix $`\mathbf{P}`$, we are able to get the expression of the path length cost, threat cost, height cost and terrain collision cost of a trajectory, and construct the cost function.
+$$
+\mathbf{P} = \begin{bmatrix}
+P_0 & P_1 & P_2 & \cdots & P_N & P_{N+1}
+\end{bmatrix} = \begin{bmatrix}
+x_0 & x_1 & x_2 & \cdots & x_N & x_{N+1} \\\\
+y_0 & y_1 & y_2 & \cdots & y_N & y_{N+1} \\\\
+z_0 & z_1 & z_2 & \cdots & z_N & z_{N+1} \\\\
+\end{bmatrix}
+$$
+
+where matrix $\mathbf{P}$ records all the coordinates of waypoints and $3\times N$ variables need optimizing (except the starting point and the end point).
+
+According to the matrix $\mathbf{P}$, we are able to get the expression of the path length cost, threat cost, height cost and terrain collision cost of a trajectory, and construct the cost function.
 
 1. Path Length Cost
 
-   Path length $`L(\mathbf{P})`$ is one of the primary factors in the cost function, because of its tight connection with flying time and energy consumption. Since we have already set waypoints, $`L(\mathbf{P})`$ can be written as
-    ```math
-    L(\mathbf{P}) =
-    \sum_{n=0}^{N}\Vert \overrightarrow{P_n P_{n+1}} \Vert_2 =
-    \sum_{n=0}^{N}\sqrt{(x_{n+1}-x_n)^2+(y_{n+1}-y_n)^2+(z_{n+1}-z_n)^2}
-    ```
+   Path length $L(\mathbf{P})$ is one of the primary factors in the cost function, because of its tight connection with flying time and energy consumption. Since we have already set waypoints, $L(\mathbf{P})$ can be written as
+
+$$
+L(\mathbf{P}) = \sum_{n=0}^{N}\Vert \overrightarrow{P_n P_{n+1}} \Vert_2 = \sum_{n=0}^{N}\sqrt{(x_{n+1}-x_n)^2+(y_{n+1}-y_n)^2+(z_{n+1}-z_n)^2}
+$$
 
     ```matlab
     J1 = 0; % Path Length
@@ -105,7 +106,7 @@ According to the matrix $`\mathbf{P}`$, we are able to get the expression of the
 
 2. Threat Cost
 
-    In terms of threat areas, the threat cost $`T(\mathbf{P})`$ relies on the distance between the UAV and the center of cylinders.
+    In terms of threat areas, the threat cost $T(\mathbf{P})$ relies on the distance between the UAV and the center of cylinders.
 
     ```matlab
     J2 = 0; % Threat Cost
@@ -123,7 +124,7 @@ According to the matrix $`\mathbf{P}`$, we are able to get the expression of the
 
 3. Height Cost
 
-    Contemporary laws usually demand that a UAV should not rise over its limited height, and UAVs are always under-performing as a consequence of heavy wind in high altitudes. Therefore, height cost $`H(\mathbf{P})`$ is worth considering.
+    Contemporary laws usually demand that a UAV should not rise over its limited height, and UAVs are always under-performing as a consequence of heavy wind in high altitudes. Therefore, height cost $H(\mathbf{P})$ is worth considering.
 
     ```matlab
     J3 = 0; % Height Cost
@@ -136,7 +137,7 @@ According to the matrix $`\mathbf{P}`$, we are able to get the expression of the
 
 4. Terrain Collision Cost
 
-    So as to avoid collision against the ground, the cost function should also contains terrain collision cost $`C(\mathbf{P})`$.
+    So as to avoid collision against the ground, the cost function should also contains terrain collision cost $C(\mathbf{P})$.
 
     ```matlab
     J4 = 0; % Terrain Collision
@@ -149,11 +150,13 @@ According to the matrix $`\mathbf{P}`$, we are able to get the expression of the
     end
     ```
 
-And then the cost function $`J(\mathbf{P})`$ could be expressed as
-```math
-J(\mathbf{P}) = [L(\mathbf{P}), T(\mathbf{P}), H(\mathbf{P}), C(\mathbf{P})]\mathbf{w}^T = w_1 L(\mathbf{P}) + w_2 T(\mathbf{P}) + w_3 H(\mathbf{P}) + w_4 C(\mathbf{P}),
-```
-where the vector $`\mathbf{w}=[w_1, w_2, w_3, w_4]`$ represents the weight of each cost respectively, and the value of it is based on experience.
+And then the cost function $J(\mathbf{P})$ could be expressed as
+
+$$
+J(\mathbf{P}) = [L(\mathbf{P}), T(\mathbf{P}), H(\mathbf{P}), C(\mathbf{P})]\mathbf{w}^T = w_1 L(\mathbf{P}) + w_2 T(\mathbf{P}) + w_3 H(\mathbf{P}) + w_4 C(\mathbf{P})
+$$
+
+where the vector $\mathbf{w}=[w_1, w_2, w_3, w_4]$ represents the weight of each cost respectively, and the value of it is based on experience.
 
 ```matlab
 cost_weights = [1 5 1 10];
@@ -162,14 +165,14 @@ cost = [J1 J2 J3 J4] * cost_weights.';
 
 Eventually, the problem can be formulated as a mathematical programming problem and can be solved by bio-inspired algorithms:
 
-```math
+$$
 \begin{align*}
-\min \quad & J(\mathbf{P}) = [L(\mathbf{P}),\, T(\mathbf{P}),\, H(\mathbf{P}),\, C(\mathbf{P})]\mathbf{w}^T \\
-\text{s.t.} \quad & g(\mathbf{P})\geq 0 \\
+\min \quad & J(\mathbf{P}) = [L(\mathbf{P}),\, T(\mathbf{P}),\, H(\mathbf{P}),\, C(\mathbf{P})]\mathbf{w}^T \\\\
+\text{s.t.} \quad & g(\mathbf{P})\geq 0
 \end{align*}
-```
+$$
 
-where $`g(\mathbf{P})\geq 0`$ corresponds to the constraints caused by the "boundaries" of the city in the model.
+where $g(\mathbf{P})\geq 0$ corresponds to the constraints caused by the "boundaries" of the city in the model.
 
 ```matlab
 switch ALGORITHM_OPTION
@@ -237,7 +240,7 @@ We make full use of state-of-the-art bio-inspired algorithms introduced below an
 
     In algorithmic terms, this translates to:
 
-    - Maintaining two competing populations: Tianji's horses ($`X_T`$) and King's horses ($`X_K`$)
+    - Maintaining two competing populations: Tianji's horses ($X_T$) and King's horses ($X_K$)
     - Each horse represents a candidate solution, with "speed" determined by fitness function values (lower fitness = faster horse in minimization problems)
     - Implementing five dynamic competition scenarios to guide search direction
 
