@@ -96,13 +96,13 @@ $$
 L(\mathbf{P}) = \sum_{n=0}^{N}\Vert \overrightarrow{P_n P_{n+1}} \Vert_2 = \sum_{n=0}^{N}\sqrt{(x_{n+1}-x_n)^2+(y_{n+1}-y_n)^2+(z_{n+1}-z_n)^2}
 $$
 
-    ```matlab
-    J1 = 0; % Path Length
-    for i = 1:N-1
-        diff = [x_all(i+1)-x_all(i); y_all(i+1)-y_all(i); z_abs(i+1)-z_abs(i)];
-        J1 = J1 + norm(diff);
-    end
-    ```
+```matlab
+J1 = 0; % Path Length
+for i = 1:N-1
+    diff = [x_all(i+1)-x_all(i); y_all(i+1)-y_all(i); z_abs(i+1)-z_abs(i)];
+    J1 = J1 + norm(diff);
+end
+```
 
 2. Threat Cost
 
